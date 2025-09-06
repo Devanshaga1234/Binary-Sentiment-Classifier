@@ -55,16 +55,14 @@ def naive_bayes(train_set, train_labels, dev_set, laplace=0.1, pos_prior=0.9, si
     pos_total_words = 0
     neg_total_words = 0
     
-    # Count words in each document based on its label
     for doc, label in zip(train_set, train_labels):
-        if label == 1:  # Positive document
+        if label == 1: 
             pos_word_counts.update(doc)
             pos_total_words += len(doc)
-        else:  # Negative document (label == 0)
+        else:  
             neg_word_counts.update(doc)
             neg_total_words += len(doc)
     
-    # Build vocabulary (union of all words in training data)
     vocabulary = set(pos_word_counts.keys()) | set(neg_word_counts.keys())
     vocab_size = len(vocabulary)
     
@@ -75,17 +73,13 @@ def naive_bayes(train_set, train_labels, dev_set, laplace=0.1, pos_prior=0.9, si
         print(f"Total negative words: {neg_total_words}")
         print(f"Vocabulary size: {vocab_size}")
 
-    # Calculate likelihood probabilities with Laplace smoothing
     pos_word_probs = {}
     neg_word_probs = {}
     
-    # Calculate P(word|positive) and P(word|negative) for each word in vocabulary
     for word in vocabulary:
-        # Laplace smoothing: P(word|class) = (count(word,class) + α) / (total_words_class + α * |V|)
         pos_word_probs[word] = (pos_word_counts[word] + laplace) / (pos_total_words + laplace * vocab_size)
         neg_word_probs[word] = (neg_word_counts[word] + laplace) / (neg_total_words + laplace * vocab_size)
     
-    # Calculate prior probabilities
     pos_prior_prob = pos_prior
     neg_prior_prob = 1 - pos_prior
     
@@ -94,20 +88,16 @@ def naive_bayes(train_set, train_labels, dev_set, laplace=0.1, pos_prior=0.9, si
         print(f"Positive prior: {pos_prior_prob}")
         print(f"Negative prior: {neg_prior_prob}")
 
-    # Classification Phase: For each document in dev_set
     yhats = []
     for doc in tqdm(dev_set, disable=silently):
-        # Calculate log probabilities to avoid underflow
         log_prob_pos = math.log(pos_prior_prob)
         log_prob_neg = math.log(neg_prior_prob)
         
-        # Sum log probabilities for each word in the document
         for word in doc:
-            if word in vocabulary:  # Only use words we've seen in training
+            if word in vocabulary: 
                 log_prob_pos += math.log(pos_word_probs[word])
                 log_prob_neg += math.log(neg_word_probs[word])
         
-        # Classify as positive if log P(positive|doc) > log P(negative|doc)
         prediction = 1 if log_prob_pos > log_prob_neg else 0
         yhats.append(prediction)
 
