@@ -162,27 +162,4 @@ The web app uses a sophisticated confidence scoring system:
 - **Requests**: 100,000/day free
 
 ### **GitHub Pages Deployment:**
-
-#### **Setup Instructions:**
-1. **Enable GitHub Pages:**
-   - Go to your repository Settings → Pages
-   - Source: "GitHub Actions"
-   - Save settings
-
-2. **Push to GitHub:**
-   ```bash
-   git add .
-   git commit -m "Add GitHub Pages deployment"
-   git push origin main
-   ```
-
-3. **Automatic Deployment:**
-   - GitHub Actions will build and deploy automatically
-   - Your site will be available at: `https://yourusername.github.io/repository-name`
-
-#### **Features:**
-- **Client-side Classification**: No server required
-- **Instant Results**: Runs entirely in the browser
-- **Free Hosting**: Unlimited bandwidth on GitHub
-- **Auto-updates**: Deploys on every push to main branch
-- **Custom Domain**: Can be configured with your own domain
+ - **Available at:** `https://yourusername.github.io/repository-name`
