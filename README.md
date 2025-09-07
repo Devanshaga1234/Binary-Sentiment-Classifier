@@ -162,4 +162,4 @@ The web app uses a sophisticated confidence scoring system:
 - **Requests**: 100,000/day free
 
 ### **GitHub Pages Deployment:**
- - **Available at:** `https://yourusername.github.io/repository-name`
+ - **Available at:** `https://devanshaga1234.github.io/Sentiment-Classifier/`
